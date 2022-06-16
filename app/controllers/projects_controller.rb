@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /friends or /friends.json
   def index
@@ -52,15 +54,22 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_url, notice: "Project was successfully destroyed." }
+      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
+  def correct_user
+
+    @project = current_user.projects.find_by(id: params[:id])
+    redirect_to projects_path, notice: "Not Authorized to edit this friend " if @project.nil?
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = Project.find(params[:id] )
     end
 
     # Only allow a list of trusted parameters through.

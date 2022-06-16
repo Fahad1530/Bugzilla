@@ -1,10 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <h1 class="display-1"><%= @project.title %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
+  <br/>
+  <%= link_to 'Edit', edit_project_path(@project), class:"btn btn-secondary" %>
+  <%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger ' %>
+  <%= link_to 'Back', projects_path, class:"btn btn-dark" %>
+</div>
 
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
