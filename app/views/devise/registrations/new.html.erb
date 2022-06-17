@@ -4,9 +4,21 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field form-group">
+    <%= f.label :Name %><br />
+    <%= f.text_field :name, autofocus: true,class:"form-control", placeholder:"Name", autocomplete: "name" %>
+  </div>
+
+  <div class="field form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true,class:"form-control", placeholder:"Email", autocomplete: "email" %>
   </div>
+
+  <div class="field form-group">
+    <%= f.label :Role %><br />
+    <%= f.select :role, options_for_select(User.roles.keys.map {|k, v| [k.humanize.capitalize, v]}), {}, { class:  "form-control", 'data-style': 'form-control' } %>
+
+  </div>
+
 
   <div class="field form-group">
     <%= f.label :password %>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   enum role: { developer: 0, manager: 1, qa: 2 }
+
   has_many :workin_ons
   has_many :projects, through: :workin_ons
 end

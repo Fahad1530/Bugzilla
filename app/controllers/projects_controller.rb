@@ -3,30 +3,28 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  # GET /friends or /friends.json
+
   def index
     @projects = Project.all
+
   end
 
-  # GET /friends/1 or /friends/1.json
   def show
+    @project = Project.find(params[:id])
   end
 
-  # GET /friends/new
   def new
-    @project = Project.new
+    @project = current_user.projects.new
   end
 
-  # GET /friends/1/edit
   def edit
   end
 
-  # POST /friends or /friends.json
   def create
-    @project = Project.new(project_params)
-
+    @project = Project.create(project_params)
     respond_to do |format|
       if @project.save
+        @project.workin_ons.create(user:current_user)
         format.html { redirect_to project_url(@project), notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
       else
@@ -36,7 +34,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /friends/1 or /friends/1.json
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -49,8 +46,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /friends/1 or /friends/1.json
   def destroy
+    @project = Project.find(params[:id])
     @project.destroy
 
     respond_to do |format|
@@ -62,18 +59,17 @@ class ProjectsController < ApplicationController
   def correct_user
 
     @project = current_user.projects.find_by(id: params[:id])
-    redirect_to projects_path, notice: "Not Authorized to edit this friend " if @project.nil?
+    redirect_to projects_path, notice: "Not Authorized to edit this project " if @project.nil?
   end
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_project
-      @project = Project.find(params[:id] )
+      @project = Project.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:title)
+      params.require(:project).permit(:title, :user_id)
     end
 end
