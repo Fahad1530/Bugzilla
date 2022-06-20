@@ -10,7 +10,8 @@
 
   <tbody>
     <% @projects.each do |project| %>
-     <% if project.workin_ons.user == current_user%>
+     <%# <% if project.workin_ons.user == current_user%>
+
       <tr>
         <td>
          <%= link_to project.title , project %>
@@ -20,7 +21,6 @@
 
 
       </tr>
-     <% end %>
     <% end %>
   </tbody>
 </table>
