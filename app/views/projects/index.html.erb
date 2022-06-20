@@ -10,7 +10,7 @@
 
   <tbody>
     <% @projects.each do |project| %>
-     <% if project.user == current_user%>
+     <% if project.workin_ons.user == current_user%>
       <tr>
         <td>
          <%= link_to project.title , project %>
