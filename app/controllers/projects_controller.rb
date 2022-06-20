@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = current_user.projects.all
-    # @students = @user.students.all
 
   end
 
@@ -57,6 +56,14 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.find_by(id: params[:id])
     redirect_to projects_path, notice: "Not Authorized to edit this project " if @project.nil?
   end
+
+  def all_users
+    @users = User.all
+
+
+  end
+
+
 
 
   private
