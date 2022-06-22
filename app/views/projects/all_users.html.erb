@@ -9,6 +9,7 @@
 
   <tbody>
     <% @users.each do |user| %>
+     <% if user.role == 'developer' || user.role == 'qa' %>
 
       <tr>
         <td>
@@ -25,6 +26,7 @@
 
       </tr>
     <% end %>
+    <% end %>
   </tbody>
  </table>
 
@@ -37,7 +39,8 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% @all_users.each do |user| %>
+     <% if user.role == 'developer' || user.role == 'qa' %>
 
       <tr>
         <td>
@@ -50,9 +53,10 @@
 
         <td>
 
-        <%= link_to 'Remove', class:"btn btn-dark" %>
+       <%= link_to 'Add Users', add_users_projects_path(project.id), class:"btn btn-dark" %>
 
       </tr>
+    <% end %>
     <% end %>
   </tbody>
  </table>
