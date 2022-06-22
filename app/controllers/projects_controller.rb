@@ -60,7 +60,8 @@ class ProjectsController < ApplicationController
   def all_users
     @project = Project.find(params[:project_id])
     @users = @project.users
-    @all_users = User.all
+    @all_users = User.where.not(id: @project.users.ids)
+
   end
 
 
