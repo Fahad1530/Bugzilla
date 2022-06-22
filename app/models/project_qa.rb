@@ -1,0 +1,2 @@
+class ProjectQa < ApplicationRecord
+end
