@@ -1,2 +1,2 @@
-class ProjectDeveloper < ApplicationRecord
+class ProjectDeveloper < WorkinOn
 end

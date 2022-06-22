@@ -1,2 +1,2 @@
-class ProjectQa < ApplicationRecord
+class ProjectQa < WorkinOn
 end

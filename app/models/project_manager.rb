@@ -1,2 +1,2 @@
-class ProjectManager < ApplicationRecord
+class ProjectManager < WorkinOn
 end
