@@ -58,14 +58,20 @@ class ProjectsController < ApplicationController
   end
 
   def all_users
-    project = Project.find(params[:project_id])
-    @users = project.users
+    @project = Project.find(params[:project_id])
+    @users = @project.users
     @all_users = User.all
   end
 
 
   def add_users
-    @users = User.all
+    project = Project.find(params[:id])
+    if project.users << User.find(params[:user_id])
+      flash[:project] = 'User added successfully'
+    else
+      flash[:project] = 'User could not be added'
+    end
+    redirect_to all_users_projects_path(project)
   end
 
 
