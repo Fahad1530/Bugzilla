@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :projects do
     member do
         get :add_users
+        get :remove_users
     end
   end
 

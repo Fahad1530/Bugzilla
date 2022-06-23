@@ -7,6 +7,4 @@ class Project < ApplicationRecord
   has_many :qas, class_name: "User", through: :project_qas, dependent: :destroy
   has_one  :project_manager, dependent: :destroy
   has_many :managers, class_name: "User", through: :project_manager, dependent: :destroy
-
-
 end
