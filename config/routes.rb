@@ -12,8 +12,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'home/about'
+  root to: 'projects#index'
+
   get ':project_id/all_users', to: 'projects#all_users', as: 'all_users_projects'
   # get ':project_id/:user_id/add_users', to: 'projects#add_users', as: 'add_users_projects'
 
-  root to: 'home#index'
+
 end

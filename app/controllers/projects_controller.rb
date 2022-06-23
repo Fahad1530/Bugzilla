@@ -5,8 +5,9 @@ class ProjectsController < ApplicationController
 
 
   def index
-    @projects = current_user.projects.all
-
+    if current_user
+      @projects = current_user.projects.all
+    end
   end
 
   def show
@@ -93,4 +94,5 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :user_id)
     end
+
 end
