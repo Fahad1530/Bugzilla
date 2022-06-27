@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy add_users remove_users]
   before_action :authenticate_user!, except: %i[index show]
   before_action :correct_user, only: %i[edit update destroy]
 
@@ -8,7 +8,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def new
@@ -40,7 +39,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
+
     @project.destroy
 
     respond_to do |format|
@@ -60,7 +59,7 @@ class ProjectsController < ApplicationController
   end
 
   def add_users
-    @project = Project.find(params[:id])
+
     flash[:project] = if @project.users << User.find(params[:user_id])
                         'User added successfully'
                       else
@@ -70,7 +69,7 @@ class ProjectsController < ApplicationController
   end
 
   def remove_users
-    @project = Project.find(params[:id])
+
     flash[:project] = if @project.users.delete(params[:user_id])
                         'User deleted successfully'
                       else
