@@ -14,8 +14,8 @@
   </div>
 
   <div class="field form-group">
-    <%= f.label :Role %><br />
-    <%= f.select :role, options_for_select(User.roles.keys.map {|k, v| [k.humanize.capitalize, v]}), {}, { class:  "form-control", 'data-style': 'form-control' } %>
+    <%= f.label :role %><br />
+     <%= f.select :role, options_for_select(User.roles.map { |key, value| [key.humanize, key] }), {prompt: "Select Type of role..."}, class: "form-control" %>
 
   </div>
 

@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.4'
 gem 'pg', '>= 0.18', '< 2.0'
 group :development, :test do
-  gem 'rubocop'
+  gem 'rubocop', '~> 1.30'
   gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite
   gem 'rubocop-performance'
   gem 'rubocop-rails'

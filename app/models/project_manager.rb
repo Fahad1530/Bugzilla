@@ -1,0 +1,2 @@
+class ProjectManager < WorkinOn
+end

@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_16_101049) do
+ActiveRecord::Schema.define(version: 2022_06_27_140922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bugs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.integer "status", default: 0
+    t.integer "bug_type", default: 0
+    t.date "deadline"
+    t.boolean "complete_status"
+    t.bigint "user_id"
+    t.string "assignment"
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_bugs_on_project_id"
+    t.index ["user_id"], name: "index_bugs_on_user_id"
+  end
+
+  create_table "project_developers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_managers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_qas", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
@@ -54,6 +84,8 @@ ActiveRecord::Schema.define(version: 2022_06_16_101049) do
     t.index ["user_id"], name: "index_workin_ons_on_user_id"
   end
 
+  add_foreign_key "bugs", "projects"
+  add_foreign_key "bugs", "users"
   add_foreign_key "workin_ons", "projects"
   add_foreign_key "workin_ons", "users"
 end

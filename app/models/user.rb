@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   has_many :workin_ons,  dependent: :destroy
   has_many :projects, through: :workin_ons, dependent: :destroy
+  has_many :bugs,  dependent: :destroy
 end
