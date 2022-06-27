@@ -1,12 +1,10 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy add_users remove_users]
+  before_action :set_project, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
   before_action :correct_user, only: %i[edit update destroy]
-  before_action :role_confirmation, only: %i[index]
+  before_action :check_role, only: %i[index]
 
-  def index
-    # @projects = current_user.projects.all if current_user
-  end
+  def index; end
 
   def show; end
 
@@ -53,6 +51,7 @@ class ProjectsController < ApplicationController
   end
 
   def add_users
+    @project = Project.find(params[:id])
     flash[:project] = if @project.users << User.find(params[:user_id])
                         'User added successfully'
                       else
@@ -62,6 +61,7 @@ class ProjectsController < ApplicationController
   end
 
   def remove_users
+    @project = Project.find(params[:id])
     flash[:project] = if @project.users.delete(params[:user_id])
                         'User deleted successfully'
                       else
@@ -76,22 +76,20 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def project_params
+    params.require(:project).permit(:title, :user_id)
+  end
+
   def correct_user
     @project = current_user.projects.find_by(id: params[:id])
     redirect_to projects_path, notice: 'Not Authorized to edit this project ' if @project.nil?
   end
 
-  def project_params
-    params.require(:project).permit(:title, :user_id)
-  end
-
-  def role_confirmation
+  def check_role
     if manager?
-      @projects = current_user.projects.all
+      @projects = current_user.projects.all if current_user
 
-    elsif qa?
-      @projects = Project.all
-
+    elsif @projects = Project.all
     end
   end
 end
