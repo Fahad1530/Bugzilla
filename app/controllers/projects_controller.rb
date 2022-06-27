@@ -2,13 +2,13 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy add_users remove_users]
   before_action :authenticate_user!, except: %i[index show]
   before_action :correct_user, only: %i[edit update destroy]
+  before_action :role_confirmation, only: %i[index]
 
   def index
-    @projects = current_user.projects.all if current_user
+    # @projects = current_user.projects.all if current_user
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @project = current_user.projects.new
@@ -39,17 +39,11 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-
     @project.destroy
 
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
     end
-  end
-
-  def correct_user
-    @project = current_user.projects.find_by(id: params[:id])
-    redirect_to projects_path, notice: 'Not Authorized to edit this project ' if @project.nil?
   end
 
   def all_users
@@ -59,7 +53,6 @@ class ProjectsController < ApplicationController
   end
 
   def add_users
-
     flash[:project] = if @project.users << User.find(params[:user_id])
                         'User added successfully'
                       else
@@ -69,7 +62,6 @@ class ProjectsController < ApplicationController
   end
 
   def remove_users
-
     flash[:project] = if @project.users.delete(params[:user_id])
                         'User deleted successfully'
                       else
@@ -84,7 +76,22 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def correct_user
+    @project = current_user.projects.find_by(id: params[:id])
+    redirect_to projects_path, notice: 'Not Authorized to edit this project ' if @project.nil?
+  end
+
   def project_params
     params.require(:project).permit(:title, :user_id)
+  end
+
+  def role_confirmation
+    if manager?
+      @projects = current_user.projects.all
+
+    elsif qa?
+      @projects = Project.all
+
+    end
   end
 end
