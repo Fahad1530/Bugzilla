@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       get :remove_users
     end
   end
-  resources :bugs
+  resources :projects do
+    resources :bugs
+  end
 
   devise_for :users
   get 'home/about'
