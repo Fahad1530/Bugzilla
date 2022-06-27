@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   # resources :projects
   resources :projects do
     member do
-        get :add_users
-        get :remove_users
+      get :add_users
+      get :remove_users
     end
   end
+  resources :bugs
 
   devise_for :users
   get 'home/about'
@@ -16,6 +17,4 @@ Rails.application.routes.draw do
 
   get ':project_id/all_users', to: 'projects#all_users', as: 'all_users_projects'
   # get ':project_id/:user_id/add_users', to: 'projects#add_users', as: 'add_users_projects'
-
-
 end
