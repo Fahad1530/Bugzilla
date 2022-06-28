@@ -24,7 +24,7 @@
         <td>
 
         <%= link_to 'Users', all_users_projects_path(project.id), class:"btn btn-dark" %>
-        <%= link_to 'Bugs', project, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-dark" %>
+        <%= link_to 'Bugs',  project_bugs_path(project.id), class:"btn btn-dark" %>
         <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
 
 
@@ -59,7 +59,7 @@
         </td>
 
         <td>
-        <%= link_to 'create a Bug', project, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-dark" %>
+        <%= link_to 'Add Bug', new_project_bug_path(project.id), class:"btn btn-dark" %>
       </tr>
     <% end %>
   </tbody>

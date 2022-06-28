@@ -1,0 +1,10 @@
+<h1>This is my bugs</h1>
+
+ <% @bug.each do |bug| %>
+    <tr>
+      <td><%= bug.title %></td>
+      <td><%= bug.description %></td>
+    </tr>
+    <td><%= image_tag bug.image, width: '400px' %></td>
+
+<% end %>

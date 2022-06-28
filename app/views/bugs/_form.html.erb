@@ -1,31 +1,37 @@
-<%= form_with model: @bug, local: true do |form| %>
 
-  <% if @article.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@bug.errors.count, "error") %> prohibited
-        this bug from being saved:
-      </h2>
-      <ul>
-        <% @bug.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with model: @bug, url: project_bugs_path(params[:project_id]), local: true do |form| %>
 
   <div class="field form-group">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, autofocus: true,class:"form-control", placeholder:"title", autocomplete: "title" %>
+    <%= form.label :title %><br />
+    <%= form.text_field :title, autofocus: true,class:"form-control", placeholder:"title", autocomplete: "title" %>
   </div>
 
-  <p>
-    <%= form.label :text %><br>
-    <%= form.text_area :text %>
-  </p>
+  <%# <%= form.hidden_field :creator_id, value: current_user.id %>
 
-  <p>
+   <div class="field form-group">
+    <%= form.label :description %><br />
+    <%= form.text_field :description, autofocus: true,class:"form-control", placeholder:"description", autocomplete: "description" %>
+  </div>
+
+ <div class="field form-group">
+    <%= form.label :bug_type %><br />
+    <%= form.select :bug_type, options_for_select(Bug.bug_types.map { |key, value| [key.humanize, key] }), {prompt: "Select Type of bug..."}, class: "form-control" %>
+  </div>
+
+   <div class="field form-group">
+    <%= form.label :deadline %><br />
+    <%= form.date_field :deadline, autofocus: true,class:"form-control", placeholder:"deadline", autocomplete: "deadline" %>
+  </div>
+  <div class="field">
+    <%= form.label "Bug Photo" %><br />
+    <%= form.file_field :image %>
+  </div>
+  <%if @bug.image.attached?%>
+    <img src="<%=(url_for(@bug.image))%>" width="100" height="100" >
+  <%end%>
+
+ <div class="actions">
     <%= form.submit %>
-  </p>
+  </div>
 
 <% end %>
