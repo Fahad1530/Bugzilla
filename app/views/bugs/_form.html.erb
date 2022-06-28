@@ -22,7 +22,13 @@
     <%= form.label :deadline %><br />
     <%= form.date_field :deadline, autofocus: true,class:"form-control", placeholder:"deadline", autocomplete: "deadline" %>
   </div>
-
+  <div class="field">
+    <%= form.label "Bug Photo" %><br />
+    <%= form.file_field :image %>
+  </div>
+  <%if @bug.image.attached?%>
+    <img src="<%=(url_for(@bug.image))%>" width="100" height="100" >
+  <%end%>
 
  <div class="actions">
     <%= form.submit %>
