@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_27_140922) do
+ActiveRecord::Schema.define(version: 2022_06_28_100420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,15 +19,15 @@ ActiveRecord::Schema.define(version: 2022_06_27_140922) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
-    t.integer "status", default: 0
     t.integer "bug_type", default: 0
     t.date "deadline"
     t.boolean "complete_status"
-    t.bigint "user_id"
-    t.string "assignment"
+    t.bigint "creator_id"
+    t.integer "developer_id"
     t.bigint "project_id"
+    t.string "description"
+    t.index ["creator_id"], name: "index_bugs_on_creator_id"
     t.index ["project_id"], name: "index_bugs_on_project_id"
-    t.index ["user_id"], name: "index_bugs_on_user_id"
   end
 
   create_table "project_developers", force: :cascade do |t|
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2022_06_27_140922) do
   end
 
   add_foreign_key "bugs", "projects"
-  add_foreign_key "bugs", "users"
+  add_foreign_key "bugs", "users", column: "creator_id"
   add_foreign_key "workin_ons", "projects"
   add_foreign_key "workin_ons", "users"
 end

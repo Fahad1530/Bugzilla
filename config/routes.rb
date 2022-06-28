@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get :remove_users
     end
   end
+  
   resources :projects do
     resources :bugs
   end
