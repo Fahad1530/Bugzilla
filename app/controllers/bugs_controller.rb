@@ -1,10 +1,8 @@
 class BugsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @bug = @project.bugs
-
+    @bug = @project.bugs.all
   end
-
 
   def new
     @project = Project.find(params[:project_id])
@@ -15,13 +13,13 @@ class BugsController < ApplicationController
     @project = Project.find(params[:project_id])
     @bug = @project.bugs.new(bug_params)
     @bug.user = current_user
-    @bug.save
-    flash[:bug] = if @bug.save
-                    'Bug added successfully'
-                  else
-                    'Bug could not be added'
-                  end
-    redirect_to projects_path
+    respond_to do |format|
+      if @bug.save
+        format.html { redirect_to project_url(@project), notice: 'bug was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
