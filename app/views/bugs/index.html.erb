@@ -1,10 +1,35 @@
-<h1>This is my bugs</h1>
 
- <% @bug.each do |bug| %>
-    <tr>
-      <td><%= bug.title %></td>
-      <td><%= bug.description %></td>
-    </tr>
-    <td><%= image_tag bug.image, width: '400px' %></td>
+<%= link_to 'Add Bug', new_project_bug_path, class: 'btn btn-primary mt-3 ml-3 mb-2' %>
 
-<% end %>
+<table class = 'table'>
+  <tr>
+    <th scope= 'col'>
+      Title
+    </th>
+    <th scope= 'col'>
+      Deadline
+    </th>
+    <th scope= 'col'>
+      Assigment
+    </th>
+    <th scope= 'col'>
+      Bug
+    </th>
+    <th scope='colspan'>
+    </td>
+  </tr>
+  <% @bug.each do |bug| %>
+    <tr  scope= 'row'>
+      <td>
+        <%= bug.title %>
+      </td>
+      <td>
+        <%= bug.deadline %>
+      </td>
+       <td>
+        <%= image_tag bug.image, width: '100px' %>
+      </td>
+      <td>
+        <%= image_tag bug.image, width: '100px' %>
+      </td>
+  <% end %>
