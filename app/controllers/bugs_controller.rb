@@ -22,6 +22,17 @@ class BugsController < ApplicationController
     end
   end
 
+  def bug_assign
+    # @project = Project.find(params[:project_id])
+    @bug = Bug.find(params[:id])
+    @bug.developer_id = current_user.id
+    if @bug.save
+      format.html { redirect_to project_path(@bug.project), notice: 'bug assignment successfully' }
+    else
+      format.html { render :new, status: :unprocessable_entity }
+    end
+  end
+
   private
 
   def bug_params

@@ -1,5 +1,8 @@
+<% if current_user.role == 'qa' %>
 
 <%= link_to 'Add Bug', new_project_bug_path, class: 'btn btn-primary mt-3 ml-3 mb-2' %>
+
+<% end %>
 
 <table class = 'table'>
   <tr>
@@ -15,6 +18,10 @@
     <th scope= 'col'>
       Bug
     </th>
+     <th scope= 'col'>
+      Completion Status
+
+     </th>
     <th scope='colspan'>
     </td>
   </tr>
@@ -28,15 +35,25 @@
       </td>
        <td>
         <% if bug.developer_id.nil? %>
-         <h3>Not Assigned</h3>
+         Not Assigned
         <% else  %>
-         <h2>Assigned</h2>
+         Assigned
         <% end %>
-
-
-
-      </td>
+        </td>
       <td>
         <%= image_tag bug.image, width: '100px' %>
       </td>
+
+      <td>
+       <% if current_user.role == 'developer'%>
+         <% if bug.developer_id.nil?%>
+          <%= link_to 'Asign Bug', bug_assign_project_bug_path(@project.id, bug.id), class: 'btn btn-primary mt-3 ml-3 mb-2' %>
+         <% else  %>
+          Completed
+         <% end %>
+       <% else  %>
+         NOT Completed
+      </td>
+      <% end %>
+
   <% end %>

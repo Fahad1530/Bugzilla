@@ -9,9 +9,13 @@ Rails.application.routes.draw do
       get :remove_users
     end
   end
-  
+
   resources :projects do
-    resources :bugs
+    resources :bugs do
+      member do
+        get :bug_assign
+      end
+    end
   end
 
   devise_for :users
