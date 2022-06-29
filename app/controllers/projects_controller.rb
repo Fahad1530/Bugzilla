@@ -86,10 +86,11 @@ class ProjectsController < ApplicationController
   end
 
   def check_role
-    if manager?
+    if manager? || developer?
       @projects = current_user.projects.all if current_user
 
-    elsif @projects = Project.all
+    elsif qa?
+      @projects = Project.all
     end
   end
 end

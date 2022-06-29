@@ -27,7 +27,14 @@
         <%= bug.deadline %>
       </td>
        <td>
-        <%= image_tag bug.image, width: '100px' %>
+        <% if bug.developer_id.nil? %>
+         <h3>Not Assigned</h3>
+        <% else  %>
+         <h2>Assigned</h2>
+        <% end %>
+
+
+
       </td>
       <td>
         <%= image_tag bug.image, width: '100px' %>
