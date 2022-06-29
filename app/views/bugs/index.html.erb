@@ -52,7 +52,13 @@
           Completed
          <% end %>
        <% else  %>
+        <% if bug.developer_id.nil?%>
          NOT Completed
+        <% else  %>
+         Completed
+        <% end %>
+
+
       </td>
       <% end %>
 
