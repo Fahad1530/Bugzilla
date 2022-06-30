@@ -1,16 +1,14 @@
 class BugsController < ApplicationController
+  before_action :set_project, only: %i[new index create]
   def index
-    @project = Project.find(params[:project_id])
     @bug = @project.bugs.all
   end
 
   def new
-    @project = Project.find(params[:project_id])
     @bug = @project.bugs.build
   end
 
   def create
-    @project = Project.find(params[:project_id])
     @bug = @project.bugs.new(bug_params)
     @bug.user = current_user
     respond_to do |format|
@@ -39,5 +37,9 @@ class BugsController < ApplicationController
 
   def bug_params
     params.require(:bug).permit(:title, :description, :bug_type, :deadline, :creator_id, :image)
+  end
+
+  def set_project
+    @project = Project.find(params[:project_id])
   end
 end

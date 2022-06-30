@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  before_action :correct_user, only: %i[edit update destroy]
   before_action :check_role, only: %i[index]
 
   def index; end
@@ -77,6 +78,11 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :user_id)
+  end
+
+  def correct_user
+    @project = current_user.projects.find_by(id: params[:id])
+    redirect_to projects_path, notice: 'Not Authorized to edit this project ' if @project.nil?
   end
 
   def check_role
