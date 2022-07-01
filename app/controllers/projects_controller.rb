@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :user_id)
-  end
+  end 
 
   def correct_user
     @project = current_user.projects.find_by(id: params[:id])
