@@ -30,7 +30,7 @@ class BugsController < ApplicationController
     @bug.developer_id = current_user.id
     if @bug.save
       respond_to do |format|
-        format.html { redirect_to project_path(@bug.project), notice: 'bug assignment successfully' }
+        format.html { redirect_to project_bugs_path, notice: 'bug assignment successfully' }
       end
     else
       format.html { render :new, status: :unprocessable_entity }
