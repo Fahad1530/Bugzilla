@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy all_users]
   before_action :authenticate_user!
   # before_action :check_role, only: %i[index]
 
@@ -52,7 +52,6 @@ class ProjectsController < ApplicationController
   end
 
   def all_users
-    @project = Project.find(params[:project_id])
     authorize @project
     @users = @project.users
     @all_users = User.where.not(id: @project.users.ids)
@@ -66,7 +65,7 @@ class ProjectsController < ApplicationController
                       else
                         'User could not be added'
                       end
-    redirect_to all_users_projects_path(@project)
+    redirect_to all_users_project_path(@project)
   end
 
   def remove_users
@@ -77,7 +76,7 @@ class ProjectsController < ApplicationController
                       else
                         'User could not be deleted'
                       end
-    redirect_to all_users_projects_path(@project)
+    redirect_to all_users_project_path(@project)
   end
 
   private
@@ -89,13 +88,4 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:title, :user_id)
   end
-
-  # def check_role
-  #   if manager? || developer?
-  #     @projects = current_user.projects.all if current_user
-
-  #   elsif qa?
-  #     @projects = Project.all
-  #   end
-  # end
 end
