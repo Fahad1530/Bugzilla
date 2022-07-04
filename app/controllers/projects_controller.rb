@@ -2,20 +2,24 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: %i[edit update destroy]
-  before_action :check_role, only: %i[index]
+  # before_action :check_role, only: %i[index]
 
-  def index; end
+  def index
+    @projects = policy_scope(Project)
+  end
 
   def show; end
 
   def new
     @project = current_user.projects.new
+    authorize @project
   end
 
   def edit; end
 
   def create
     @project = Project.create(project_params)
+    authorize @project
     respond_to do |format|
       if @project.save
         @project.workin_ons.create(user: current_user)
@@ -27,6 +31,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    authorize @project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to project_url(@project), notice: 'Project was successfully updated.' }
@@ -37,6 +42,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    authorize @project
     @project.destroy
 
     respond_to do |format|
@@ -78,19 +84,19 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :user_id)
-  end 
+  end
 
   def correct_user
     @project = current_user.projects.find_by(id: params[:id])
     redirect_to projects_path, notice: 'Not Authorized to edit this project ' if @project.nil?
   end
 
-  def check_role
-    if manager? || developer?
-      @projects = current_user.projects.all if current_user
+  # def check_role
+  #   if manager? || developer?
+  #     @projects = current_user.projects.all if current_user
 
-    elsif qa?
-      @projects = Project.all
-    end
-  end
+  #   elsif qa?
+  #     @projects = Project.all
+  #   end
+  # end
 end
