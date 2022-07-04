@@ -10,7 +10,7 @@ class BugPolicy < ApplicationPolicy
   # end
 
   def index?
-    user.present? && user.role == 'qa'
+    user.present?
   end
 
   def new?
@@ -22,6 +22,6 @@ class BugPolicy < ApplicationPolicy
   end
 
   def bug_assign?
-    return true if user.present? && user.role == 'developer'
+    return true if user.role == 'developer'
   end
 end
