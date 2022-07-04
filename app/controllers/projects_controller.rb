@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :authenticate_user!
-  before_action :correct_user, only: %i[edit update destroy]
   # before_action :check_role, only: %i[index]
 
   def index
@@ -52,12 +51,14 @@ class ProjectsController < ApplicationController
 
   def all_users
     @project = Project.find(params[:project_id])
+    authorize @project
     @users = @project.users
     @all_users = User.where.not(id: @project.users.ids)
   end
 
   def add_users
     @project = Project.find(params[:id])
+    authorize @project
     flash[:project] = if @project.users << User.find(params[:user_id])
                         'User added successfully'
                       else
@@ -68,6 +69,7 @@ class ProjectsController < ApplicationController
 
   def remove_users
     @project = Project.find(params[:id])
+    authorize @project
     flash[:project] = if @project.users.delete(params[:user_id])
                         'User deleted successfully'
                       else
@@ -84,11 +86,6 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :user_id)
-  end
-
-  def correct_user
-    @project = current_user.projects.find_by(id: params[:id])
-    redirect_to projects_path, notice: 'Not Authorized to edit this project ' if @project.nil?
   end
 
   # def check_role
