@@ -18,7 +18,7 @@ class BugsController < ApplicationController
       if @bug.save
         format.html { redirect_to project_bugs_path(@project.id), notice: 'bug was successfully created.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to new_project_bug_path(@project.id), notice: 'Vallidation Failed' }
       end
     end
   end
