@@ -1,2 +1,2 @@
-class ProjectQa < WorkinOn
+class ProjectQa < ProjectUser
 end

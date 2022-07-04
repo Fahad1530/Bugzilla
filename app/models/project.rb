@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  has_many :workin_ons, dependent: :destroy
-  has_many :users, through: :workin_ons, dependent: :destroy
+  has_many :project_users, dependent: :destroy
+  has_many :users, through: :project_users, dependent: :destroy
   has_many :project_developers, dependent: :destroy, dependent: :destroy
   has_many :developers, class_name: 'User', through: :project_developers, dependent: :destroy, source: :project
   has_many :project_qas, dependent: :destroy

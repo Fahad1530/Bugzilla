@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-  authorize @project
+    authorize @project
   end
 
   def new
@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
     authorize @project
     respond_to do |format|
       if @project.save
-        @project.workin_ons.create(user: current_user)
+        @project.project_users.create(user: current_user)
         format.html { redirect_to project_url(@project), notice: 'Project was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }

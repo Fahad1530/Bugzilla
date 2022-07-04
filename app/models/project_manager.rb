@@ -1,2 +1,2 @@
-class ProjectManager < WorkinOn
+class ProjectManager < ProjectUser
 end

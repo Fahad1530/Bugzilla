@@ -1,2 +1,2 @@
-class ProjectDeveloper < WorkinOn
+class ProjectDeveloper < ProjectUser
 end
