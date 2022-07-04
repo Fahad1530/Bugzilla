@@ -70,3 +70,4 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'pundit'
+gem 'cloudinary'

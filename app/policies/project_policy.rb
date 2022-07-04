@@ -18,6 +18,10 @@ class ProjectPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    record.project_manager == user
+  end
+
   def new?
     user.present? && user.role == 'manager'
   end

@@ -1,0 +1,18 @@
+development:
+  cloud_name: dxvdv7ixy
+  api_key: '361974682786351'
+  api_secret: RBAsnOy-mcya_ef7j8X-skvj730
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dxvdv7ixy
+  api_key: '361974682786351'
+  api_secret: RBAsnOy-mcya_ef7j8X-skvj730
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dxvdv7ixy
+  api_key: '361974682786351'
+  api_secret: RBAsnOy-mcya_ef7j8X-skvj730
+  enhance_image_tag: true
+  static_file_support: false
