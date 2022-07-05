@@ -1,8 +1,7 @@
+# frozen_string_literal: true
+
 class CreateProjectQas < ActiveRecord::Migration[5.2]
   def change
-    create_table :project_qas do |t|
-
-      t.timestamps
-    end
+    create_table :project_qas, &:timestamps
   end
 end

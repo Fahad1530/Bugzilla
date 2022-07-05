@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bug < ApplicationRecord
   belongs_to :user, foreign_key: 'creator_id'
   belongs_to :project

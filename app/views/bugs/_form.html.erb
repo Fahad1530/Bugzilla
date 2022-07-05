@@ -1,37 +1,33 @@
-
-<%= form_with model: @bug, url: project_bugs_path(params[:project_id]), local: true do |form| %>
-
+<%=form_with model: @bug, url: project_bugs_path(params[:project_id]), local: true do |form| %>
   <div class="field form-group">
-    <%= form.label :title %><br />
-    <%= form.text_field :title, autofocus: true,class:"form-control", placeholder:"title", autocomplete: "title",required: true %>
+    <%=form.label :title %>
+    <br />
+    <%=form.text_field :title, autofocus: true,class: "form-control", placeholder: "title", autocomplete: "title",required: true %>
   </div>
-
-  <%# <%= form.hidden_field :creator_id, value: current_user.id %>
-
-   <div class="field form-group">
-    <%= form.label :description %><br />
-    <%= form.text_field :description, autofocus: true,class:"form-control", placeholder:"description", autocomplete: "description" , required: true %>
+  <div class="field form-group">
+    <%=form.label :description %>
+    <br />
+    <%=form.text_field :description, autofocus: true,class: "form-control", placeholder: "description", autocomplete: "description" , required: true %>
   </div>
-
- <div class="field form-group">
-    <%= form.label :bug_type %><br />
-    <%= form.select :bug_type, options_for_select(Bug.bug_types.map { |key, value| [key.humanize, key] }), {prompt: "Select Type of bug..."}, class: "form-control" , required: true %>
+  <div class="field form-group">
+    <%=form.label :bug_type %>
+    <br />
+    <%=form.select :bug_type, options_for_select(Bug.bug_types.map { |key, value| [key.humanize, key] }), {prompt: "Select Type of bug..."}, class: "form-control" , required: true %>
   </div>
-
-   <div class="field form-group">
-    <%= form.label :deadline %><br />
-    <%= form.date_field :deadline, autofocus: true,class:"form-control", placeholder:"deadline", autocomplete: "deadline", required: true  %>
+  <div class="field form-group">
+    <%=form.label :deadline %>
+    <br />
+    <%=form.date_field :deadline, autofocus: true,class: "form-control", placeholder: "deadline", autocomplete: "deadline", required: true %>
   </div>
   <div class="field">
-    <%= form.label "Bug Photo" %><br />
-    <%= form.file_field :image, required: true  %>
+    <%=form.label "Bug Photo" %>
+    <br />
+    <%=form.file_field :image, required: true %>
   </div>
   <%if @bug.image.attached?%>
-    <img src="<%=(url_for(@bug.image))%>" width="100" height="100" >
+    <img src="<%=(url_for(@bug.image))%>" width="100" height="100">
   <%end%>
-
- <div class="actions">
-    <%= form.submit %>
+  <div class="actions">
+    <%=form.submit %>
   </div>
-
 <% end %>

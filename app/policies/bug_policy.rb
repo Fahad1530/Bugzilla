@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BugPolicy < ApplicationPolicy
   # class Scope < Scope
   #   def resolve

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy all_users]
   before_action :authenticate_user!
-  # before_action :check_role, only: %i[index]
 
   def index
     @projects = policy_scope(Project)

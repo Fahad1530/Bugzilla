@@ -1,4 +1,4 @@
-class BugsController < ApplicationController
+]class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
   def index
     @bug = @project.bugs.all
@@ -24,7 +24,6 @@ class BugsController < ApplicationController
   end
 
   def bug_assign
-    # @project = Project.find(params[:project_id])
     @bug = Bug.find(params[:id])
     authorize @bug
     @bug.developer_id = current_user.id
