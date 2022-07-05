@@ -1,4 +1,6 @@
-]class BugsController < ApplicationController
+# frozen_string_literal: true
+
+class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
   def index
     @bug = @project.bugs.all

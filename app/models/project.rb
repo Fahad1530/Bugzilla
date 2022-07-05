@@ -11,5 +11,5 @@ class Project < ApplicationRecord
   has_one :manager, class_name: 'User', through: :project_manager, dependent: :destroy, source: :project
 
   has_many :bugs, dependent: :destroy
-  validates :title, uniqueness: true
+  validates :title, presence: true
 end
