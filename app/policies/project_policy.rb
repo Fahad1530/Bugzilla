@@ -19,7 +19,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def show?
-    record.project_manager == user
+    return true if record.manager == user && user.role == 'manager'
   end
 
   def new?
