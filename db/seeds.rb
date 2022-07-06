@@ -19,3 +19,9 @@ User.create!([{
   role: "qa",
   password: 123456
 }])
+
+u = User.create(name: "Fahad",
+  email: "fahadmurtaza1530@gmail.com",
+  password: 123456,
+  role: "manager")
+  

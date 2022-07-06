@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
   def add_users
     @project = Project.find(params[:id])
     authorize @project
-    flash[:project] = if @project.users << User.find(params[:user_id])
+    flash[:project] = if @project.project_users.create(user_id: params[:user_id])
                         'User added successfully'
                       else
                         'User could not be added'
@@ -72,12 +72,15 @@ class ProjectsController < ApplicationController
   def remove_users
     @project = Project.find(params[:id])
     authorize @project
-    flash[:project] = if @project.users.delete(params[:user_id])
-                        'User deleted successfully'
-                      else
-                        'User could not be deleted'
-                      end
-    redirect_to all_users_project_path(@project)
+    @project_user = @project.project_users.find_by(user_id: params[:user_id])
+    if @project_user.delete
+      flash[:success] = "User deleted"
+      respond_to do |format|
+        format.html { redirect_to all_users_project_path(@project)}
+        format.js {}
+      end
+    else
+    end
   end
 
   private

@@ -10,7 +10,7 @@
       <tbody>
         <% @users.each do |user| %>
           <% if user.role=='developer' || user.role=='qa' %>
-            <tr>
+            <tr id='removed_user-<%= user.id %>'>
               <td>
                 <%=user.name %>
               </td>
@@ -18,7 +18,7 @@
                 <%=user.role %>
               </td>
               <td>
-                <%=link_to 'Remove', remove_users_project_path(@project, user_id: user.id) %>
+                <%=link_to 'Remove', remove_users_project_path(@project, user_id: user.id), remote: true %>
               </tr>
             <% end %>
           <% end %>
@@ -30,22 +30,9 @@
           <th></th>
           <th></th>
         </thead>
-        <tbody>
-          <% @all_users.each do |user| %>
-            <% if user.role=='developer' || user.role=='qa' %>
-              <tr>
-                <td>
-                  <%=user.name %>
-                </td>
-                <td>
-                  <%=user.role %>
-                </td>
-                <td>
-                  <%=link_to 'Add User', add_users_project_path(@project, user_id: user.id) %>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+        <tbody id="add_user">
+          <%= render partial: 'user', locals: { all_users: @all_users } %>
+        </tbody>
+      </table>
     </div>
+  </div>
