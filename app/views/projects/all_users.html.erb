@@ -1,68 +1,51 @@
 <div class="container">
-<%=flash[:project]%>
- <div class="row">
- <table class="table table-striped table-bordered table-hover">
-  <thead class="thead-dark">
-      <th>Project Users</th>
-      <th></th>
-      <th></th>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-     <% if user.role == 'developer' || user.role == 'qa' %>
-
-      <tr>
-        <td>
-         <%=  user.name   %>
-        </td>
-
-        <td>
-         <%=  user.role   %>
-        </td>
-
-        <td>
-
-        <%= link_to 'Remove', remove_users_project_path(@project, user_id: user.id) %>
-
-      </tr>
-    <% end %>
-    <% end %>
-  </tbody>
- </table>
-
-
-<table class="table table-striped table-bordered table-hover">
-  <thead class="thead-dark">
-      <th>Other Users</th>
-      <th></th>
-      <th></th>
-  </thead>
-
-  <tbody>
-    <% @all_users.each do |user| %>
-     <% if user.role == 'developer' || user.role == 'qa'  %>
-
-      <tr>
-        <td>
-         <%=  user.name   %>
-        </td>
-
-        <td>
-         <%=  user.role   %>
-        </td>
-
-        <td>
-
-       <%= link_to 'Add User', add_users_project_path(@project, user_id: user.id) %>
-
-      </tr>
-
-    <% end %>
-    <% end %>
-  </tbody>
- </table>
-
-
- </div>
-</div>
+  <%=flash[:project]%>
+  <div class="row">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
+        <th>Project Users</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <% if user.role=='developer' || user.role=='qa' %>
+            <tr>
+              <td>
+                <%=user.name %>
+              </td>
+              <td>
+                <%=user.role %>
+              </td>
+              <td>
+                <%=link_to 'Remove', remove_users_project_path(@project, user_id: user.id) %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <th>Other Users</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @all_users.each do |user| %>
+            <% if user.role=='developer' || user.role=='qa' %>
+              <tr>
+                <td>
+                  <%=user.name %>
+                </td>
+                <td>
+                  <%=user.role %>
+                </td>
+                <td>
+                  <%=link_to 'Add User', add_users_project_path(@project, user_id: user.id) %>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>

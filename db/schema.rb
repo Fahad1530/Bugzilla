@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_28_113335) do
+ActiveRecord::Schema.define(version: 2022_07_04_131047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2022_06_28_113335) do
   create_table "bugs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
+    t.string "title", null: false
     t.integer "bug_type", default: 0
     t.date "deadline"
     t.boolean "complete_status"
@@ -66,8 +66,17 @@ ActiveRecord::Schema.define(version: 2022_06_28_113335) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "project_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_users_on_project_id"
+    t.index ["user_id"], name: "index_project_users_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -89,25 +98,16 @@ ActiveRecord::Schema.define(version: 2022_06_28_113335) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "name", null: false
     t.integer "role", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "workin_ons", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_workin_ons_on_project_id"
-    t.index ["user_id"], name: "index_workin_ons_on_user_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bugs", "projects"
   add_foreign_key "bugs", "users", column: "creator_id"
-  add_foreign_key "workin_ons", "projects"
-  add_foreign_key "workin_ons", "users"
+  add_foreign_key "project_users", "projects"
+  add_foreign_key "project_users", "users"
 end

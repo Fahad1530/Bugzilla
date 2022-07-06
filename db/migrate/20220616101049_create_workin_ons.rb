@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWorkinOns < ActiveRecord::Migration[5.2]
   def change
     create_table :workin_ons do |t|
