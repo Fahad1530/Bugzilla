@@ -14,30 +14,24 @@
             <%= link_to 'Add Projects', new_project_path, class:"nav-link"%>
           </li>
           <li class="nav-item">
-            <%= link_to 'Sign out',  destroy_user_session_path, method: :delete, class:"nav-link"%>
+            <%= link_to 'Edit Profile',  edit_user_registration_path, class:"nav-link"%>
           </li>
           <li class="nav-item">
-            <%= link_to 'Edit Profile',  edit_user_registration_path, class:"nav-link"%>
+            <%= link_to 'Sign out',  destroy_user_session_path, method: :delete, class:"nav-link"%>
           </li>
         <% elsif current_user.role == "developer" %>
           <li class="nav-item">
-            <%= link_to 'developer', new_user_registration_path, class:"nav-link"%>
+            <%= link_to 'Edit Profile',  edit_user_registration_path, class:"nav-link"%>
           </li>
           <li class="nav-item">
             <%= link_to 'Sign out',  destroy_user_session_path, method: :delete, class:"nav-link"%>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Edit Profile',  edit_user_registration_path, class:"nav-link"%>
           </li>
         <% elsif current_user.role == "qa" %>
           <li class="nav-item">
-            <%= link_to 'qa Projects', projects_path, class:"nav-link"%>
+            <%= link_to 'Edit Profile',  edit_user_registration_path, class:"nav-link"%>
           </li>
           <li class="nav-item">
             <%= link_to 'Sign out',  destroy_user_session_path, method: :delete, class:"nav-link"%>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Edit Profile',  edit_user_registration_path, class:"nav-link"%>
           </li>
         <% end %>
       <% else %>
