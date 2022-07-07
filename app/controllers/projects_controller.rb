@@ -74,12 +74,11 @@ class ProjectsController < ApplicationController
     authorize @project
     @project_user = @project.project_users.find_by(user_id: params[:user_id])
     if @project_user.delete
-      flash[:success] = "User deleted"
+      flash[:success] = 'User deleted'
       respond_to do |format|
-        format.html { redirect_to all_users_project_path(@project)}
+        format.html { redirect_to all_users_project_path(@project) }
         format.js {}
       end
-    else
     end
   end
 
