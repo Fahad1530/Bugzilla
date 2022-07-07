@@ -7,6 +7,10 @@ class BugsController < ApplicationController
     authorize @bug
   end
 
+  def show
+    authorize @bug
+  end
+
   def new
     @bug = @project.bugs.build
     authorize @bug

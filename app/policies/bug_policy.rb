@@ -1,18 +1,9 @@
 # frozen_string_literal: true
 
 class BugPolicy < ApplicationPolicy
-  # class Scope < Scope
-  #   def resolve
-  #     if user.manager? || user.developer?
-  #       user.projects.all
-  #     elsif user.qa?
-  #       scope.all
-  #     end
-  #   end
-  # end
-
   def index?
-    user.present?
+    @aa = record.map(&:project_id)
+    return true if user.projects.find(@aa) || user.role == 'qa'
   end
 
   def new?
