@@ -55,4 +55,8 @@ class BugsController < ApplicationController
   def set_project
     @project = Project.find(params[:project_id])
   end
+
+  def skip_qa
+    @project = Project.find(params[:project_id])
+  end
 end
