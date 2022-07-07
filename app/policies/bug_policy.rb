@@ -2,8 +2,8 @@
 
 class BugPolicy < ApplicationPolicy
   def index?
-  rescue ActiveRecord::RecordNotFound
-    return true if user.projects.find(@project_id) || user.role == 'qa'
+    @project_id = record.map(&:project_id)
+    return true if user.projects.find(@project_id)
   end
 
   def new?
