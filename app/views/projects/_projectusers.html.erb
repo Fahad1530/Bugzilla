@@ -1,0 +1,14 @@
+<% users.each do |user| %>
+  <% if user.role=='developer' || user.role=='qa' %>
+    <tr id='removed_user2-<%= user.id %>'>
+      <td>
+        <%=user.name %>
+      </td>
+      <td>
+        <%=user.role %>
+      </td>
+      <td>
+        <%=link_to 'Remove', remove_users_project_path(@project, user_id: user.id)%>
+      </tr>
+    <% end %>
+  <% end %>

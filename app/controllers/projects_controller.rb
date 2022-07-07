@@ -61,12 +61,14 @@ class ProjectsController < ApplicationController
   def add_users
     @project = Project.find(params[:id])
     authorize @project
-    flash[:project] = if @project.project_users.create(user_id: params[:user_id])
-                        'User added successfully'
-                      else
-                        'User could not be added'
-                      end
-    redirect_to all_users_project_path(@project)
+    @project_user = @project.project_users.find_by(user_id: params[:user_id])
+    if @project.project_users.create(user_id: params[:user_id])
+      flash[:success] = 'User Added'
+      respond_to do |format|
+        format.html { redirect_to all_users_project_path(@project) }
+        format.js {}
+      end
+    end
   end
 
   def remove_users
