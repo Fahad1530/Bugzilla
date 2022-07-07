@@ -22,13 +22,10 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.create(project_params)
     authorize @project
+    @project.save
+    @project.project_users.create(user: current_user)
     respond_to do |format|
-      if @project.save
-        @project.project_users.create(user: current_user)
-        format.html { redirect_to project_url(@project), notice: 'Project was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+      format.html { redirect_to projects_url, notice: 'Project was successfully created.' }
     end
   end
 
