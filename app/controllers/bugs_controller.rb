@@ -49,14 +49,10 @@ class BugsController < ApplicationController
   private
 
   def bug_params
-    params.require(:bug).permit(:title, :description, :bug_type, :deadline, :creator_id, :image)
+    params.require(:bug).permit(:title, :description, :bug_type, :deadline, :image)
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
-  end
-
-  def skip_qa
     @project = Project.find(params[:project_id])
   end
 end

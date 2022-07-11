@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 user1 = User.new(
   name: 'Fahad',
   email: 'fahadmurtaza1530@gmail.com',
@@ -26,7 +28,6 @@ user1.projects.create(
 user1.projects.create(
   title: 'Third Project'
 )
-
 
 user2 = User.new(
   name: 'ali',
