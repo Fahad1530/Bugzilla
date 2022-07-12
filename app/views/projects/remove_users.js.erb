@@ -1,0 +1,2 @@
+$("#removed_user-" + <%= @project_user.user_id %>).remove();
+$("#add_user").append("<%= j render(partial: 'user', locals: { all_users: [@project_user.user] }) %>" );

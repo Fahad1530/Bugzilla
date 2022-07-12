@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(version: 2022_07_04_131047) do
     t.integer "bug_type", default: 0
     t.date "deadline"
     t.boolean "complete_status"
-    t.bigint "creator_id"
+    t.bigint "user_id"
     t.integer "developer_id"
     t.bigint "project_id"
     t.string "description"
-    t.index ["creator_id"], name: "index_bugs_on_creator_id"
     t.index ["project_id"], name: "index_bugs_on_project_id"
+    t.index ["user_id"], name: "index_bugs_on_user_id"
   end
 
   create_table "project_developers", force: :cascade do |t|
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_131047) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bugs", "projects"
-  add_foreign_key "bugs", "users", column: "creator_id"
+  add_foreign_key "bugs", "users"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
 end

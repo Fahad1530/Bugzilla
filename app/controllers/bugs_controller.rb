@@ -4,6 +4,14 @@ class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
   def index
     @bug = @project.bugs.all
+    if current_user.role == 'qa'
+      skip_authorization
+    else
+      authorize @bug
+    end
+  end
+
+  def show
     authorize @bug
   end
 
@@ -41,7 +49,7 @@ class BugsController < ApplicationController
   private
 
   def bug_params
-    params.require(:bug).permit(:title, :description, :bug_type, :deadline, :creator_id, :image)
+    params.require(:bug).permit(:title, :description, :bug_type, :deadline, :image)
   end
 
   def set_project
