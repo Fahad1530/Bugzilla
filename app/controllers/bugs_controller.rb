@@ -4,11 +4,7 @@ class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
   def index
     @bug = @project.bugs.all
-    if current_user.role == 'qa'
-      skip_authorization
-    else
-      authorize @bug
-    end
+    authorize @bug
   end
 
   def show
