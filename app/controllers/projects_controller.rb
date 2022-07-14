@@ -3,26 +3,19 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy all_users]
   before_action :authenticate_user!
+  before_action :authorize_project, only: %i[all_users show destroy]
+  after_action :authorize_project, only: %i[new create update add_users remove_users]
 
   def index
     @projects = policy_scope(Project)
   end
 
-  def show
-    authorize @project
-  end
-
   def new
     @project = current_user.projects.new
-    authorize @project
-  end
-
-  def edit;
   end
 
   def create
     @project = Project.create(project_params)
-    authorize @project
     @project.save
     @project.project_users.create(user: current_user)
     respond_to do |format|
@@ -42,7 +35,6 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    authorize @project
     @project.destroy
 
     respond_to do |format|
@@ -51,14 +43,12 @@ class ProjectsController < ApplicationController
   end
 
   def all_users
-    authorize @project
     @users = @project.users
     @all_users = User.where.not(id: @project.users.ids)
   end
 
   def add_users
     @project = Project.find(params[:id])
-    authorize @project
     @project_user = @project.project_users.find_by(user_id: params[:user_id])
     return unless @project.project_users.create(user_id: params[:user_id])
 
@@ -71,7 +61,6 @@ class ProjectsController < ApplicationController
 
   def remove_users
     @project = Project.find(params[:id])
-    authorize @project
     @project_user = @project.project_users.find_by(user_id: params[:user_id])
     return unless @project_user.delete
 
@@ -90,5 +79,9 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :user_id)
+  end
+
+  def authorize_project
+    authorize @project
   end
 end
