@@ -1,24 +1,50 @@
+
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Software Requirments:**
 
-Things you may want to cover:
+* Ruby version 2.7
 
-- Ruby version
+* Rails 5.2
 
-- System dependencies
+# Project Configuration
 
-- Configuration
+* Database creation ( Postgresql Database use )
 
-- Database creation
+* For initalizing database run rails db:setup this which creating, loading schema, seed data into database.
 
-- Database initialization
+* Three types of user created **manager**, **developer** and **qa**
 
-- How to run the test suite
+* You can login using these accounts:
 
-- Services (job queues, cache servers, search engines, etc.)
+* **Manager:**
 
-- Deployment instructions
+   * email: fahadmurtaza1530@gmail.com
+   * password: 123456
 
-- ...
+* Developer:
+
+   * email: fahad.murtaza@devsinc.com
+   * password: 123456
+
+* Qa:
+
+   * email: ibrarhussain0602@gmail.com
+   * password: 123456
+
+
+# Roles
+
+1. Manager can create, show, edit and delete project.
+2. Manager can add users in project and also see bugs in project.
+3. Manager can also invite others user through link.
+4. Developer can see project and they can assign bug him self and also mark bug as completed the bug.
+5. Developer can also see other developers and QAs which is currently working on the project.
+6. QA can see the all project and add bug in any project they can also see other developer or QAs which is currently working on the project.
+
+* Deployment at Heroku
+*App link: https://bugzillaaaaa.herokuapp.com
+
+
+
+

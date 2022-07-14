@@ -17,7 +17,8 @@ class ProjectsController < ApplicationController
     authorize @project
   end
 
-  def edit; end
+  def edit;
+  end
 
   def create
     @project = Project.create(project_params)

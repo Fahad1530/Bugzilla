@@ -2,23 +2,18 @@
 
 class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
+  after_action :authorize_bug, only: %i[index new create update]
+
   def index
     @bug = @project.bugs.all
-    authorize @bug
-  end
-
-  def show
-    authorize @bug
   end
 
   def new
     @bug = @project.bugs.build
-    authorize @bug
   end
 
   def create
     @bug = @project.bugs.new(bug_params)
-    authorize @bug
     @bug.user = current_user
     respond_to do |format|
       if @bug.save
@@ -29,9 +24,8 @@ class BugsController < ApplicationController
     end
   end
 
-  def bug_assign
+  def update
     @bug = Bug.find(params[:id])
-    authorize @bug
     @bug.developer_id = current_user.id
     if @bug.save
       respond_to do |format|
@@ -50,5 +44,9 @@ class BugsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
+  end
+
+  def authorize_bug
+    authorize @bug
   end
 end

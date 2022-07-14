@@ -14,7 +14,7 @@ class BugPolicy < ApplicationPolicy
     new?
   end
 
-  def bug_assign?
+  def update?
     return true if user.role == 'developer'
   end
 end

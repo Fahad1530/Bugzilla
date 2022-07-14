@@ -33,7 +33,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.present? && user == project.user && user.role == 'manager'
+    return true if record.manager == user && user.role == 'manager'
   end
 
   def destroy?
