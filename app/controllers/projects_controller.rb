@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy all_users]
+  before_action :set_project, only: %i[show edit update destroy all_users project_access remove_project_user]
   before_action :authenticate_user!
-  before_action :authorize_project, only: %i[all_users show destroy]
-  after_action :authorize_project, only: %i[new create update add_users remove_users]
+  before_action :authorize_project, only: %i[all_users show update destroy]
+  after_action :authorize_project, only: %i[new create update project_access remove_project_user]
+  before_action :project_users, only: %i[project_access remove_project_user]
 
   def index
     @projects = policy_scope(Project)
@@ -16,15 +17,15 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create(project_params)
-    @project.save
-    @project.project_users.create(user: current_user)
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully created.' }
+    if @project.save
+      @project.project_users.create(user: current_user)
+      respond_to do |format|
+        format.html { redirect_to projects_url, notice: 'Project was successfully created.' }
+      end
     end
   end
 
   def update
-    authorize @project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to project_url(@project), notice: 'Project was successfully updated.' }
@@ -35,10 +36,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+    if @project.destroy
+      respond_to do |format|
+        format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      end
     end
   end
 
@@ -47,9 +48,7 @@ class ProjectsController < ApplicationController
     @all_users = User.where.not(id: @project.users.ids)
   end
 
-  def add_users
-    @project = Project.find(params[:id])
-    @project_user = @project.project_users.find_by(user_id: params[:user_id])
+  def project_access
     return unless @project.project_users.create(user_id: params[:user_id])
 
     flash[:success] = 'User Added'
@@ -59,9 +58,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def remove_users
-    @project = Project.find(params[:id])
-    @project_user = @project.project_users.find_by(user_id: params[:user_id])
+  def remove_project_user
     return unless @project_user.delete
 
     flash[:success] = 'User deleted'
@@ -79,6 +76,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:title, :user_id)
+  end
+
+  def project_users
+    @project_user = @project.project_users.find_by(user_id: params[:user_id])
   end
 
   def authorize_project

@@ -44,11 +44,11 @@ class ProjectPolicy < ApplicationPolicy
     return true if user.present? && user.role == 'manager'
   end
 
-  def add_users?
+  def project_access?
     return true if user.present? && user.role == 'manager'
   end
 
-  def remove_users?
+  def remove_project_user?
     return true if user.present? && user.role == 'manager'
   end
 end
