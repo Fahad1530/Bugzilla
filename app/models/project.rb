@@ -12,11 +12,4 @@ class Project < ApplicationRecord
 
   has_many :bugs, dependent: :destroy
   validates :title, presence: true
-
-  # def users(project)
-  #   @users = @project.users
-  #   @all_users = User.where.not(id: @project.users.ids)
-  # end
-
-
 end
