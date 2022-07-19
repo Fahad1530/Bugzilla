@@ -54,9 +54,23 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'bugzillaaaa.herokuapp.com', protocol: 'https' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: Rails.application.credentials.gmail[:SENDMAIL_USERNAME],
+    password: Rails.application.credentials.gmail[:SENDMAIL_PASSWORD],
+    domain: 'bugzillaaaa.herokuapp.com',
+    address: 'smtp.gmail.com',
+    port: '587',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
+  config.assets.js_compressor = Uglifier.new(harmony: true)
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

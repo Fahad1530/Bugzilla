@@ -42,7 +42,7 @@
       <td>
         <% if current_user.role=='developer' %>
           <% if bug.developer_id.nil?%>
-            <%= link_to 'Asign Bug', bug_assign_project_bug_path(@project.id, bug.id), class: 'btn btn-primary mt-3 ml-3 mb-2' %>
+            <%= link_to 'Asign Bug', project_bug_path(@project.id, bug.id),:method=> :put, class: 'btn btn-primary mt-3 ml-3 mb-2' %>
           <% else %>
             Completed
           <% end %>

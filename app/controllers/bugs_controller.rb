@@ -2,41 +2,30 @@
 
 class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
+  after_action :authorize_bug, only: %i[index new create update]
+  before_action :developer_to_bug, only: %i[update]
+
   def index
     @bug = @project.bugs.all
-    if current_user.role == 'qa'
-      skip_authorization
-    else
-      authorize @bug
-    end
-  end
-
-  def show
-    authorize @bug
   end
 
   def new
     @bug = @project.bugs.build
-    authorize @bug
   end
 
   def create
     @bug = @project.bugs.new(bug_params)
-    authorize @bug
     @bug.user = current_user
-    respond_to do |format|
-      if @bug.save
+    if @bug.save
+      respond_to do |format|
         format.html { redirect_to project_bugs_path(@project.id), notice: 'bug was successfully created.' }
-      else
-        format.html { redirect_to new_project_bug_path(@project.id), notice: 'Vallidation Failed' }
       end
+    else
+      format.html { render :new, status: :unprocessable_entity }
     end
   end
 
-  def bug_assign
-    @bug = Bug.find(params[:id])
-    authorize @bug
-    @bug.developer_id = current_user.id
+  def update
     if @bug.save
       respond_to do |format|
         format.html { redirect_to project_bugs_path, notice: 'bug assignment successfully' }
@@ -54,5 +43,14 @@ class BugsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
+  end
+
+  def authorize_bug
+    authorize @bug
+  end
+
+  def developer_to_bug
+    @bug = Bug.find(params[:id])
+    @bug.developer_id = current_user.id
   end
 end

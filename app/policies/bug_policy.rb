@@ -3,7 +3,7 @@
 class BugPolicy < ApplicationPolicy
   def index?
     @project_id = record.map(&:project_id)
-    return true if user.projects.find(@project_id)
+    return true if (user.projects.find_by(id: @project_id) && user.role == 'developer') || user.role == 'qa'
   end
 
   def new?
@@ -14,7 +14,7 @@ class BugPolicy < ApplicationPolicy
     new?
   end
 
-  def bug_assign?
+  def update?
     return true if user.role == 'developer'
   end
 end
