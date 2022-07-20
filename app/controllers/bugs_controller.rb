@@ -11,7 +11,7 @@ class BugsController < ApplicationController
   end
 
   def new
-    @bug = @project.bugs.build
+    @bug = @project.bugs.build(bug_params)
   end
 
   def create

@@ -11,13 +11,13 @@ class Bug < ApplicationRecord
   validates :title, :bug_type, :project_id, :deadline, :image, presence: true
 
   def check_date
-    errors.add(:deadline,  I18n.t(:datechck)) if !deadline.nil? && (deadline < Time.zone.today)
+    errors.add(:deadline, I18n.t(:datechck)) if !deadline.nil? && (deadline < Time.zone.today)
     errors.add(:image, I18n.t(:datechck)) if image.attached? == false
   end
 
   def image_type
     return unless image.attached? && !image.content_type.in?(%('image/jpg image/png'))
 
-    errors.add(:image, I18n.t(:imgcheck) )
+    errors.add(:image, I18n.t(:imgcheck))
   end
 end
