@@ -15,22 +15,6 @@
 
 * Three types of user created **manager**, **developer** and **qa**
 
-* You can login using these accounts:
-
-* **Manager:**
-
-   * email: fahadmurtaza1530@gmail.com
-   * password: 123456
-
-* Developer:
-
-   * email: fahad.murtaza@devsinc.com
-   * password: 123456
-
-* Qa:
-
-   * email: ibrarhussain0602@gmail.com
-   * password: 123456
 
 
 # Roles

@@ -11,5 +11,7 @@ class Project < ApplicationRecord
   has_one :manager, class_name: 'User', through: :project_manager, dependent: :destroy, source: :project
 
   has_many :bugs, dependent: :destroy
-  validates :title, presence: true
+  validates :title, length: 5..5, presence: true
+
+  scope :not_users, ->(ids) { User.where.not(id: ids) }
 end
