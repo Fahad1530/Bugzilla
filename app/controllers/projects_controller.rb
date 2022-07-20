@@ -39,9 +39,9 @@ class ProjectsController < ApplicationController
 
   def destroy
     return unless @project.destroy
-      respond_to do |format|
-        format.html { redirect_to projects_url, notice: t(:detroyed) }
-      end
+
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: t(:detroyed) }
     end
   end
 
