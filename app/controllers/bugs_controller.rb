@@ -2,7 +2,7 @@
 
 class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
-  after_action :authorize_bug, only: %i[index new create update]
+  after_action :authorize_bug, only: %i[new create update]
   before_action :set_bug, only: %i[update]
   before_action :developer_to_bug, only: %i[update]
 
