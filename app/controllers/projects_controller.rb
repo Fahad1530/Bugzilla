@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
   def grant_access
     return unless @project.project_users.create(user_id: params[:user_id])
 
-    flash[:success] = 'User Added'
+    flash[:success] = t(:user_added)
     respond_to do |format|
       format.html { redirect_to all_users_project_path(@project) }
       format.js {}
@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
   def remove_user
     return unless @project_user.delete
 
-    flash[:success] = 'User deleted'
+    flash[:success] = t(:user_deleted)
     respond_to do |format|
       format.html { redirect_to all_users_project_path(@project) }
       format.js {}
@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
-    @ids = @project.users.ids
+    @ids = @project.user_ids
   end
 
   def project_params

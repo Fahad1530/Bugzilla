@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   resources :projects do
     get :grant_access, :remove_user, :all_users, on: :member
+
     resources :bugs, only: %i[index new create update]
   end
+  
   root to: 'projects#index'
 end

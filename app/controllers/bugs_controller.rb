@@ -8,6 +8,7 @@ class BugsController < ApplicationController
 
   def index
     @bug = @project.bugs
+    authorize @bug
   end
 
   def new
@@ -17,6 +18,7 @@ class BugsController < ApplicationController
   def create
     @bug = @project.bugs.new(bug_params)
     @bug.user = current_user
+
     if @bug.save
       respond_to do |format|
         format.html { redirect_to project_bugs_path(@project.id), notice: t(:bugcreated) }
