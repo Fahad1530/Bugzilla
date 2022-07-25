@@ -9,10 +9,4 @@ class User < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users, dependent: :destroy
   has_many :bugs, dependent: :destroy
-
-  private
-
-  def full_name
-    name
-  end
 end
