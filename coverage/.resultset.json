@@ -58,6 +58,32 @@
           null
         ]
       },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/bug.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          9,
+          9,
+          null,
+          null,
+          1,
+          10,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
       "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project.rb": {
         "lines": [
           null,
@@ -75,67 +101,7 @@
           1,
           1,
           null,
-          2,
-          null
-        ]
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_user.rb": {
-        "lines": [
-          null,
-          null,
           1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_developer.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_qa.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_manager.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/bug.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          0,
-          null,
           null
         ]
       },
@@ -555,8 +521,50 @@
         ],
         "branches": {
         }
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_manager.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_qa.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_user.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_developer.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1658911795
+    "timestamp": 1658917493
   }
 }
