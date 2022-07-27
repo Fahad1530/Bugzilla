@@ -76,3 +76,4 @@ gem 'factory_bot_rails'
 gem 'rspec-rails'
 gem 'rubocop-rspec' # or gem 'rubocop-rspec' depending on your test suite
 gem 'shoulda-matchers', '~> 5.0'
+gem 'faker', require: false
