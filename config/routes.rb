@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
     resources :bugs, only: %i[index new create update]
   end
-  
+
   root to: 'projects#index'
 end
