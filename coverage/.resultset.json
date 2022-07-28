@@ -90,53 +90,57 @@
           null,
           null,
           1,
-          0,
-          0,
-          0,
+          2,
+          2,
+          2,
           null,
-          0,
+          2,
           null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          0,
-          0,
           null,
           null,
           null,
           1,
-          0,
-          0,
-          null,
+          1,
           null,
           1,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
+          2,
           null,
           null,
           null,
           1,
-          0,
+          1,
+          1,
           null,
-          0,
-          0,
-          0,
-          0,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          2,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          1,
+          2,
+          1,
           null,
           null,
           null,
           1,
           null,
           1,
-          0,
-          0,
+          6,
+          6,
+          null,
+          null,
+          1,
+          4,
           null,
           null,
           1,
@@ -144,11 +148,7 @@
           null,
           null,
           1,
-          0,
-          null,
-          null,
-          1,
-          3,
+          11,
           null,
           null
         ]
@@ -221,7 +221,7 @@
           1,
           1,
           null,
-          1,
+          2,
           null
         ]
       },
@@ -262,23 +262,23 @@
           null,
           null,
           1,
-          0,
+          4,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null
         ]
@@ -291,8 +291,8 @@
           1,
           null,
           1,
-          3,
-          3,
+          9,
+          9,
           null,
           null,
           1,
@@ -345,6 +345,56 @@
           1,
           1,
           1,
+          null
+        ]
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_manager.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_developer.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_qa.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/bug.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
           null
         ]
       },
@@ -497,66 +547,8 @@
         ],
         "branches": {
         }
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_manager.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_qa.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_developer.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/bug.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
       }
     },
-    "timestamp": 1659009096
+    "timestamp": 1659018856
   }
 }

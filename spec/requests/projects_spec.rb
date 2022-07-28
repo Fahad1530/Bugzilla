@@ -4,18 +4,11 @@ RSpec.describe 'Projects', type: :request do
   let(:user) { FactoryBot.create(:user, :manager) }
   let(:project) { FactoryBot.create(:project) }
 
-  # let(:project_user) { FactoryBot.create(:project_user,) }
   before do
     sign_in user
   end
 
   describe 'GET #index' do
-    # it 'association' do
-    #   create(:project_user , user: user , project: project)
-    #   byebug
-    #   expect(true).to eq(true)
-    # end
-
     it 'allows user to view the list of projects' do
       get projects_path
       expect(response).to render_template('projects/index')
@@ -59,14 +52,51 @@ RSpec.describe 'Projects', type: :request do
     end
   end
 
-  describe 'project#create' do
-    it 'creates project' do
-      expect { post projects_path, params: { project: { title: ' my project' } } }.to change(Project, :count).by(1)
+  describe 'project#update' do
+    it 'project should be updated' do
+      create(:project_user, user: user, project: project)
+      put project_path(project.id), params: { project: { title: 'new project' } }
+      expect(flash[:notice]).to eq(I18n.t(:updated))
     end
 
-    it 'does not create project' do
-      post projects_path, params: { project: { title: ' m' } }
+    it 'project should not updated' do
+      create(:project_user, user: user, project: project)
+      put project_path(project.id), params: { project: { title: 'n' } }
       expect(response).to redirect_to(new_project_path)
+    end
+  end
+
+  describe 'project#destroy' do
+    it 'project should be deleted' do
+      create(:project_user, user: user, project: project)
+      delete project_path(project.id), params: { project: project.title }
+      expect(flash[:notice]).to eq(I18n.t(:detroyed))
+    end
+  end
+
+  describe 'project#all_user' do
+    it 'project should be deleted' do
+      create(:project_user, user: user, project: project)
+      get all_users_project_path(project.id), params: { project: project.title }
+
+      expect(response).to render_template('projects/all_users')
+    end
+  end
+
+  describe 'project#grant_access' do
+    it 'user should given access' do
+      create(:project_user, user: user, project: project)
+      get grant_access_project_path(project.id), params: { project: project.title }
+      expect(response).to redirect_to(all_users_project_path)
+    end
+  end
+
+  describe 'project#remove_user' do
+    it 'user should be removed from project' do
+      create(:project_user, user: user, project: project)
+      get remove_user_project_path(project.id), params: { project: project.title, user_id: user.id }
+
+      expect(response).to redirect_to(all_users_project_path)
     end
   end
 end
