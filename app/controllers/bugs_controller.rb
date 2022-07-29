@@ -18,13 +18,13 @@ class BugsController < ApplicationController
   def create
     @bug = @project.bugs.new(bug_params)
     @bug.user = current_user
+    respond_to do |format|
+      if @bug.save
 
-    if @bug.save
-      respond_to do |format|
         format.html { redirect_to project_bugs_path(@project.id), notice: t(:bugcreated) }
+      else
+        format.html { redirect_to new_project_bug_path, notice: t(:ncreated) }
       end
-    else
-      format.html { render :new, status: :unprocessable_entity }
     end
   end
 
@@ -34,7 +34,7 @@ class BugsController < ApplicationController
         format.html { redirect_to project_bugs_path, notice: t(:bugupdated) }
       end
     else
-      format.html { render :new, status: :unprocessable_entity }
+      format.html { redirect_to project_bugs_path, notice: t(:ncreated) }
     end
   end
 

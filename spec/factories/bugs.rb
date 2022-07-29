@@ -2,10 +2,13 @@
 
 FactoryBot.define do
   factory :bug do
-    title { 'test_name' }
-    deadline { '2022-08-28' }
-    user_id { '1' }
-    developer_id { '2' }
-    project_id { '3' }
+    title { 'my new bug' }
+    description { 'test_name sdmlkfm' }
+    deadline { '02-08-2034' }
+    bug_type { 'feature' }
+    developer_id { '1' }
+    image { fixture_file_upload 'app/assets/images/ava.png', 'application/png' }
+    user
+    project
   end
 end

@@ -7,7 +7,7 @@ class Bug < ApplicationRecord
   has_one_attached :image
   validate :check_date, :image_type
   validates :title, presence: true, length: { in: 5..30 }
-  validates :title, :bug_type, :project_id, :deadline, :image, presence: true
+  validates :bug_type, :project_id, :deadline, :image, presence: true
 
   def check_date
     errors.add(:deadline, I18n.t(:datechck)) if !deadline.nil? && (deadline < Time.zone.today)
