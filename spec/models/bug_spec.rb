@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Bug, type: :model do
-  let(:bug) { FactoryBot.build(:bug) }
+  # let(:bug) { FactoryBot.build(:bug) }
 
   describe 'validations Test' do
     it { is_expected.to validate_presence_of(:title) }
@@ -23,7 +23,7 @@ RSpec.describe Bug, type: :model do
       file = Rails.root.join('app/assets/images/ava.png')
       image = ActiveStorage::Blob.create_after_upload!(io: File.open(file, 'rb'), filename: 'ava.png').signed_id
       bug = described_class.new(image: image)
-      bug.send(:image_type)
+      bug.image_type
       expect(bug.errors.messages).to eq({})
     end
   end
