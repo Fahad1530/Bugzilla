@@ -56,12 +56,12 @@ Rails.application.configure do
   config.log_level = :debug
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: 'bugzillaaaa.herokuapp.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'bugzillaaaaaaa.herokuapp.com', protocol: 'https' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.credentials.gmail[:SENDMAIL_USERNAME],
     password: Rails.application.credentials.gmail[:SENDMAIL_PASSWORD],
-    domain: 'bugzillaaaa.herokuapp.com',
+    domain: 'bugzillaaaaaaa.herokuapp.com',
     address: 'smtp.gmail.com',
     port: '587',
     authentication: :plain,
