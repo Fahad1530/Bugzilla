@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Bug, type: :model do
-  # let(:bug) { FactoryBot.build(:bug) }
-
   describe 'validations Test' do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_length_of(:title).is_at_least(5) }
@@ -33,13 +31,13 @@ RSpec.describe Bug, type: :model do
     image = ActiveStorage::Blob.create_after_upload!(io: File.open(file, 'rb'),
                                                      filename: 'my.pdf').signed_id
     bug = described_class.new(image: image)
-    bug.send(:image_type)
+    bug.image_type
     expect(bug.errors.messages).not_to be(nil)
   end
 
   it 'not valid date' do
     deadline = build(:bug, deadline: '2022-06-25')
-    deadline.send(:check_date)
+    deadline.check_date
     expect(deadline.errors.messages).not_to be(nil)
   end
 end

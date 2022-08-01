@@ -44,3 +44,4 @@ en:
   user_deleted: "User Added"
   user_added: "'User Added'"
   unauthorized: 'you are not authorized for this page'
+  png: "needs to be a jpg or png!"
