@@ -58,6 +58,16 @@
           null
         ]
       },
+      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_user.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/bug.rb": {
         "lines": [
           null,
@@ -72,14 +82,14 @@
           1,
           null,
           1,
-          9,
-          9,
+          0,
+          0,
           null,
           null,
           1,
-          10,
+          0,
           null,
-          1,
+          0,
           null,
           null
         ]
@@ -542,18 +552,6 @@
         "branches": {
         }
       },
-      "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_user.rb": {
-        "lines": [
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/home/dev/Downloads/DEvsinc Training/RAILS TRAINING/Bugzilla_app/app/models/project_developer.rb": {
         "lines": [
           null,
@@ -565,6 +563,6 @@
         }
       }
     },
-    "timestamp": 1659363414
+    "timestamp": 1659365065
   }
 }

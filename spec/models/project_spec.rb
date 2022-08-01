@@ -3,11 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  let(:project) { FactoryBot.build(:project) }
-
   describe 'validations Test' do
     it { is_expected.to validate_presence_of(:title) }
-    it { expect(project).to validate_uniqueness_of(:title).ignoring_case_sensitivity }
+    it { expect(build(:project)).to validate_uniqueness_of(:title).ignoring_case_sensitivity }
     it { is_expected.to validate_length_of(:title).is_at_least(5) }
   end
 
@@ -33,9 +31,9 @@ RSpec.describe Project, type: :model do
 
   describe '#not_users' do
     it 'raises ArgumentError with equal name' do
-      user1 = FactoryBot.create(:user)
-      user2 = FactoryBot.create(:user)
-      project = FactoryBot.create(:project)
+      user1 = create(:user)
+      user2 = create(:user)
+      project = create(:project)
       described_class.not_users(user1.id)
       expect(described_class.not_users(user1.id)).not_to include(user1)
     end
