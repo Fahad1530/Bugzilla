@@ -2,11 +2,13 @@
 
 class BugsController < ApplicationController
   before_action :set_project, only: %i[new index create]
-  after_action :authorize_bug, only: %i[index new create update]
+  after_action :authorize_bug, only: %i[new create update]
+  before_action :set_bug, only: %i[update]
   before_action :developer_to_bug, only: %i[update]
 
   def index
-    @bug = @project.bugs.all
+    @bug = @project.bugs
+    authorize @bug
   end
 
   def new
@@ -16,22 +18,23 @@ class BugsController < ApplicationController
   def create
     @bug = @project.bugs.new(bug_params)
     @bug.user = current_user
-    if @bug.save
-      respond_to do |format|
-        format.html { redirect_to project_bugs_path(@project.id), notice: 'bug was successfully created.' }
+    respond_to do |format|
+      if @bug.save
+
+        format.html { redirect_to project_bugs_path(@project.id), notice: t(:bugcreated) }
+      else
+        format.html { redirect_to new_project_bug_path, notice: t(:ncreated) }
       end
-    else
-      format.html { render :new, status: :unprocessable_entity }
     end
   end
 
   def update
     if @bug.save
       respond_to do |format|
-        format.html { redirect_to project_bugs_path, notice: 'bug assignment successfully' }
+        format.html { redirect_to project_bugs_path, notice: t(:bugupdated) }
       end
     else
-      format.html { render :new, status: :unprocessable_entity }
+      format.html { redirect_to project_bugs_path, notice: t(:ncreated) }
     end
   end
 
@@ -49,8 +52,11 @@ class BugsController < ApplicationController
     authorize @bug
   end
 
-  def developer_to_bug
+  def set_bug
     @bug = Bug.find(params[:id])
+  end
+
+  def developer_to_bug
     @bug.developer_id = current_user.id
   end
 end

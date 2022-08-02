@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class WorkinOnTest < ActiveSupport::TestCase
+class ProjectUserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

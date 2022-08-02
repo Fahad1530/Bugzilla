@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy all_users project_access remove_project_user]
+  before_action :set_project, only: %i[show edit update destroy all_users grant_access remove_user]
   before_action :authenticate_user!
   before_action :authorize_project, only: %i[all_users show update destroy]
-  after_action :authorize_project, only: %i[new create update project_access remove_project_user]
-  before_action :project_users, only: %i[project_access remove_project_user]
+  after_action :authorize_project, only: %i[new create update grant_access remove_user]
+  before_action :project_users, only: %i[grant_access remove_user]
 
   def index
     @projects = policy_scope(Project)
@@ -17,10 +17,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create(project_params)
-    if @project.save
-      @project.project_users.create(user: current_user)
-      respond_to do |format|
-        format.html { redirect_to projects_url, notice: 'Project was successfully created.' }
+    respond_to do |format|
+      if @project.save
+        @project.project_users.create(user: current_user)
+        format.html { redirect_to projects_url, notice: t(:created) }
+      else
+        format.html { redirect_to new_project_path, notice: t(:ncreated) }
       end
     end
   end
@@ -28,40 +30,40 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to project_url(@project), notice: 'Project was successfully updated.' }
+        format.html { redirect_to project_url(@project), notice: t(:updated) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to new_project_path, notice: t(:ncreated) }
       end
     end
   end
 
   def destroy
-    if @project.destroy
-      respond_to do |format|
-        format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      end
+    return unless @project.destroy
+
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: t(:detroyed) }
     end
   end
 
   def all_users
     @users = @project.users
-    @all_users = User.where.not(id: @project.users.ids)
+    @all_users = Project.not_users(@ids)
   end
 
-  def project_access
+  def grant_access
     return unless @project.project_users.create(user_id: params[:user_id])
 
-    flash[:success] = 'User Added'
+    flash[:success] = t(:user_added)
     respond_to do |format|
       format.html { redirect_to all_users_project_path(@project) }
       format.js {}
     end
   end
 
-  def remove_project_user
+  def remove_user
     return unless @project_user.delete
 
-    flash[:success] = 'User deleted'
+    flash[:success] = t(:user_deleted)
     respond_to do |format|
       format.html { redirect_to all_users_project_path(@project) }
       format.js {}
@@ -72,6 +74,7 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
+    @ids = @project.user_ids
   end
 
   def project_params
@@ -83,6 +86,6 @@ class ProjectsController < ApplicationController
   end
 
   def authorize_project
-    authorize @project
+    authorize @project 
   end
 end

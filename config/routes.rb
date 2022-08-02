@@ -4,13 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :projects do
-    get :project_access, :remove_project_user, :all_users, on: :member
+    get :grant_access, :remove_user, :all_users, on: :member
+
+    resources :bugs, only: %i[index new create update]
   end
 
-  resources :projects do
-    resources :bugs
-  end
-
-  get 'home/about'
   root to: 'projects#index'
 end

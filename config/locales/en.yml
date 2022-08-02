@@ -31,3 +31,17 @@
 
 en:
   hello: "Hello world"
+  created: "Project was successfully created."
+  ncreated: "Vallidation Failed"
+  updated: "Project was successfully updated."
+  detroyed: "Project was successfully destroyed."
+  bugcreated: "Bug was successfully created."
+  bugupdated: "Bug updated successfully"
+  datechck: "enter today or later date"
+  ismissinig: "is missing!"
+  imgcheck: "needs to be a jpg or png!"
+  record_not_found: 'No record found'
+  user_deleted: "User Added"
+  user_added: "'User Added'"
+  unauthorized: 'you are not authorized for this page'
+  png: "needs to be a jpg or png!"
