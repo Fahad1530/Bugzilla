@@ -86,6 +86,6 @@ class ProjectsController < ApplicationController
   end
 
   def authorize_project
-    authorize @project
+    authorize @project 
   end
 end
