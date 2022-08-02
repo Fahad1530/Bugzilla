@@ -6,15 +6,23 @@ RSpec.describe 'Projects', type: :request do
 
   before do
     sign_in user
+    create(:project_user, user: user, project: project)
   end
 
   describe 'GET #index' do
-    it 'allows user to view the list of projects' do
+    before do
       get projects_path
+    end
+
+    it 'index page only if user log in' do
       expect(response).to render_template('projects/index')
     end
 
-    it 'does not list projects if the user is not logged in' do
+    it 'assign project' do
+      expect(assigns(:projects)).to match_array([project])
+    end
+
+    it 'does not show index page if the user is not logged in' do
       sign_out user
       get projects_path
       expect(response.status).to eq(302)
@@ -22,14 +30,11 @@ RSpec.describe 'Projects', type: :request do
     end
 
     it 'only authorize record will be displayed' do
-      create(:project_user, user: user, project: project)
-      get projects_path
       expect(assigns(:projects)).to eq([project])
     end
 
     it 'record will not be shown to not authorized person' do
       project1 = create(:project, title: 'Second Project')
-      get projects_path
       expect(assigns(:projects)).not_to eq([project1])
     end
   end
@@ -54,13 +59,11 @@ RSpec.describe 'Projects', type: :request do
 
   describe 'project#update' do
     it 'project should be updated' do
-      create(:project_user, user: user, project: project)
       put project_path(project.id), params: { project: { title: 'new project' } }
       expect(flash[:notice]).to eq(I18n.t(:updated))
     end
 
     it 'project should not updated' do
-      create(:project_user, user: user, project: project)
       put project_path(project.id), params: { project: { title: 'n' } }
       expect(response).to redirect_to(new_project_path)
     end
@@ -68,7 +71,6 @@ RSpec.describe 'Projects', type: :request do
 
   describe 'project#destroy' do
     it 'project should be deleted' do
-      create(:project_user, user: user, project: project)
       delete project_path(project.id), params: { project: project.title }
       expect(flash[:notice]).to eq(I18n.t(:detroyed))
     end
@@ -76,16 +78,13 @@ RSpec.describe 'Projects', type: :request do
 
   describe 'project#all_user' do
     it 'project should be deleted' do
-      create(:project_user, user: user, project: project)
       get all_users_project_path(project.id), params: { project: project.title }
-
       expect(response).to render_template('projects/all_users')
     end
   end
 
   describe 'project#grant_access' do
     it 'user should given access' do
-      create(:project_user, user: user, project: project)
       get grant_access_project_path(project.id), params: { project: project.title }
       expect(response).to redirect_to(all_users_project_path)
     end
@@ -93,9 +92,7 @@ RSpec.describe 'Projects', type: :request do
 
   describe 'project#remove_user' do
     it 'user should be removed from project' do
-      create(:project_user, user: user, project: project)
       get remove_user_project_path(project.id), params: { project: project.title, user_id: user.id }
-
       expect(response).to redirect_to(all_users_project_path)
     end
   end
