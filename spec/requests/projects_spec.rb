@@ -28,7 +28,7 @@ RSpec.describe 'Projects', type: :request do
     end
 
     it 'record will not be shown to not authorized person' do
-      project1 = FactoryBot.create(:project, title: 'Second Project')
+      project1 = create(:project, title: 'Second Project')
       get projects_path
       expect(assigns(:projects)).not_to eq([project1])
     end
