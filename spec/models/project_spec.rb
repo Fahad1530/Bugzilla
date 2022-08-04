@@ -10,7 +10,7 @@ RSpec.describe Project, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to have_many(:project_users).dependent(:destroy) }
+    # it { is_expected.to have_many(:project_users).dependent(:destroy) }
     it { is_expected.to have_many(:project_developers).dependent(:destroy) }
     it { is_expected.to have_many(:users).through(:project_users).dependent(:destroy) }
 
